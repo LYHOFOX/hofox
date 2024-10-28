@@ -15,7 +15,7 @@ def MissingImg(sessionData: str, oldSite: Site, newSite: Site):
     :return: null
     """
     # 临时使用
-    url = "https://wiki.biligame.com/oni/index.php?title=%E7%89%B9%E6%AE%8A:%E9%9C%80%E8%A6%81%E7%9A%84%E6%96%87%E4%BB%B6&limit=500&offset=0"
+    url = "https://wiki.biligame.com/noita/index.php?title=%E7%89%B9%E6%AE%8A:%E9%9C%80%E8%A6%81%E7%9A%84%E6%96%87%E4%BB%B6&limit=500&offset=0"
 
     res = requests.get(url, cookies={'SESSDATA': sessionData})
     res.raise_for_status()
@@ -28,7 +28,7 @@ def MissingImg(sessionData: str, oldSite: Site, newSite: Site):
     for li in special_ol.find_all('li'):
         first_a = li.find('a')
         # 拿到第一个标签的名字 类似：  文件:材料科学研究.png
-        if first_a.text == "文件:Http://image.namedq.com/uploads/20190303/20/1551614448-fAvkVdETgm.jpg":
+        if first_a.text == "文件:https://noita.wiki.gg/zh/wiki/File:Shaman_wind.png":
             pass
         fileName = re.sub("文件:", "", first_a.text)
         print(fileName)
