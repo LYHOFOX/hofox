@@ -1,6 +1,6 @@
 from mwclient import Site
 
-user_agent = '幽狐HOFOX'
+user_agent = 'charlesBot/0.0.1(charles@klei.vip)'
 
 wikigg = Site(host='noita.wiki.gg',
               path="/zh/", clients_useragent=user_agent)
