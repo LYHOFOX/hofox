@@ -19,7 +19,7 @@ def transferPage(oldSite: Site, newSite: Site, pageName: str, username, password
         return 0
     # 尝试将DEV命名空间下得模块转化
     if "Dev:" in oldSiteText:
-        oldSiteText = re.sub("Dev:", "Module:Dev/", oldSiteText)
+        oldSiteText = re.sub("Dev:", "Module:Dev/","Template:Infobox spell", oldSiteText)
     # 图片判断
     if "File:" in pageName:
         transferImg(oldSite=oldSite, newSite=newSite, fileName=re.sub('File:', '', pageName))
