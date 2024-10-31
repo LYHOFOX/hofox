@@ -39,6 +39,7 @@ def update_pages(old_site: Site, new_site: Site, username, password, sessiondata
     changes_title = []
 
     for page in pages:
+
         title = page["title"]
         try:
             print(f"正在处理{title}")
@@ -50,22 +51,9 @@ def update_pages(old_site: Site, new_site: Site, username, password, sessiondata
                 print(f"已经处理过{title},跳过")
                 continue
 
-            
-            # 只处理模板页面
-            if ns != 10:  # 命名空间编号10对应于模板
-                print(f"{title}不是模板页面，跳过")
-                continue
-
-            
             # 图片判断
             if ("File:" in title) & (page["ns"] == 6):
                 transferImg(oldSite=old_site, newSite=new_site, fileName=title)
-                changes_title.append(title)
-                continue
-
-            # 模板页面同步
-            if title.startswith("Template:"):
-                sync_template_page(old_site, new_site, title, page["user"])
                 changes_title.append(title)
                 continue
 
@@ -83,13 +71,6 @@ def update_pages(old_site: Site, new_site: Site, username, password, sessiondata
             changes_title.append(title)
         except Exception as e:
             print(e)
-
-def sync_template_page(old_site, new_site, title, user):
-    oldpage_text = re.sub(replace_str, "", old_site.pages[title].text())
-    newpage = new_site.pages[title]
-    newpage_text = newpage.text()
-    if oldpage_text != newpage_text:
-        newpage.edit(text=oldpage_text, summary=f'模板页面{title}由{user}更改,于此时同步', bot=True)
 
 
 def transferAllPages(oldSite: Site, newSite: Site):
