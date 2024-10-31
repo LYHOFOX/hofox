@@ -65,6 +65,14 @@ def update_pages(old_site: Site, new_site: Site, username, password, sessiondata
                 oldpage_text = re.sub("Dev:", "Module:Dev/", oldpage_text)
             new_site_text = new_site.pages[title].text()
 
+            # Mine
+            prefix= "Template:"
+            if title.startswith(prefix):
+                namespace =title[len(prefix):]
+                for page in pages:
+                    if page.title.startswith(prefix)and page.title[len(prefix):]== namespace:
+                        res = new site.pages[title].edit(oldpage text, summary=f'原站点{title}由{page["user"]}更改,于此时同步')
+
             if oldpage_text != new_site_text:
                 res = new_site.pages[title].edit(oldpage_text, summary=f'原站点{title}由{page["user"]}更改,于此时同步')
                 print(res)
